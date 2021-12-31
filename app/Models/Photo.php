@@ -9,9 +9,13 @@ class Photo extends Model
 {
     use HasFactory;
 
-    public function property() {
 
-        return $this->belongsTo(Property::class, 'property_id', 'id');
+    /*
+     *  Get the parent model, either identity or a product
+     */
+    public function photoable() {
+
+        return $this->morphTo();
     }
 
     public function created_by_user() {

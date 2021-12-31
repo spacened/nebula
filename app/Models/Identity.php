@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Agency extends Model
+class Identity extends Model
 {
     use HasFactory;
 
-
     public function properties() {
 
-        return $this->hasMany(Property::class, 'agent_id');
+        return $this->hasMany(Property::class, 'identity_id');
     }
 
     public function location() {
@@ -20,15 +19,14 @@ class Agency extends Model
         return $this->belongsTo(Location::class, 'location_id', 'id');
     }
 
-    public function photo() {
+    public function photos() {
 
-        return $this->hasOne(Photo::class, 'photo_id', 'id');
+        return $this->morphMany(Photo::class, 'photoable');
     }
 
     /*
-     * Get all the users that have a role assigned with the agency
+     * Get all the users that have a role assigned with the identity
      */
-
     public function users() {
 
         return $this->hasMany(Role::class, 'agent_id', 'id');
@@ -38,4 +36,5 @@ class Agency extends Model
 
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
+
 }

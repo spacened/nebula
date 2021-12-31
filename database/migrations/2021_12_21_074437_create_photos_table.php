@@ -15,11 +15,12 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id');
             $table->string('disk');
             $table->string('filename');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->enum('visibility', ['public', 'private', 'group']);
+            $table->bigInteger('photoable_id');
+            $table->string('photoable_type');
             $table->foreignId('uploaded_by');
             $table->timestamps();
         });

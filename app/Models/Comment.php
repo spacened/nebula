@@ -9,9 +9,13 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function property() {
+    public function commentable() {
 
-        return $this->belongsTo(Property::class, 'property_id', 'id');
+        return $this->morphTo();
     }
 
+    public function created_by_user() {
+
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

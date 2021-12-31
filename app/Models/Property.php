@@ -9,9 +9,9 @@ class Property extends Model
 {
     use HasFactory;
 
-    public function agency() {
+    public function identity() {
 
-        return $this->belongsTo(Agency::class, 'agent_id', 'id');
+        return $this->belongsTo(Identity::class, 'identity_id', 'id');
     }
 
     public function location() {
@@ -21,12 +21,12 @@ class Property extends Model
 
     public function photos() {
 
-        return $this->hasMany(Photo::class, 'property_id', 'id');
+        return $this->morphMany(Photo::class, 'photoable');
     }
 
     public function comments() {
 
-        return $this->hasMany(Comment::class, 'property_id', 'id');
+        return $this->morphMany(Comment::class, 'comentable');
     }
 
     public function created_by_user() {

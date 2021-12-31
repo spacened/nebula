@@ -15,11 +15,12 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id');
-            $table->foreignId('user_id');
+            $table->foreignId('identity_id');
             $table->text('comment');
             $table->enum('status', ['draft', 'pending', 'published', 'spam', 'deleted']);
-            $table->foreignId('created_by');
+            $table->bigInteger('commentable_id');
+            $table->string('commentable_type'); 
+            $table->foreignId('created_by'); //User
             $table->timestamps();
         });
     }
